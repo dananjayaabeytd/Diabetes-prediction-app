@@ -92,6 +92,7 @@ if st.button('Predict'):
         
         # Log the response status and content
         st.write(f"Response status code: {response.status_code}")
+        st.write(f"Response headers: {response.headers}")
         st.write(f"Response content: {response.content.decode('utf-8')}")
         
         # Check if the response is JSON
