@@ -90,6 +90,7 @@ if st.button('Predict'):
     
     if response.status_code == 200:
         try:
+            st.write("Response content:", response.content)  # Log the response content
             prediction = response.json().get('prediction')
             if prediction is not None:
                 if prediction[0] == 0:
