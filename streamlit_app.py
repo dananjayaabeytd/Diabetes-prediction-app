@@ -76,38 +76,12 @@ data = {
 df = pd.DataFrame(data)
 
 # Button to make prediction
-# if st.button('Predict'):
-#     # response = requests.post('http://127.0.0.1:5000/predict', json=df.to_dict(orient='records'))
-#     response = requests.post('https://d-predict-app.streamlit.app/predict', json=df.to_dict(orient='records'))
-#     prediction = response.json()['prediction']
-    
-#     if prediction[0] == 0:
-#         st.success('The person does not have diabetes.')
-#     else:
-#         st.error('The person has diabetes.')
-
 if st.button('Predict'):
-    try:
-        response = requests.post('https://d-predict-app.streamlit.app/predict', json=df.to_dict(orient='records'))
-        
-        # Log the response status and content
-        st.write(f"Response status code: {response.status_code}")
-        st.write(f"Response headers: {response.headers}")
-        st.write(f"Response content: {response.content.decode('utf-8')}")
-        
-        # Check if the response is JSON
-        if response.headers.get('Content-Type') == 'application/json':
-            prediction = response.json().get('prediction')
-            if prediction is not None:
-                if prediction[0] == 0:
-                    st.success('The person does not have diabetes.')
-                else:
-                    st.error('The person has diabetes.')
-            else:
-                st.error('Prediction key not found in the response.')
-        else:
-            st.error('The response is not in JSON format.')
-    except requests.exceptions.RequestException as e:
-        st.error(f"Request failed: {e}")
-    except ValueError as e:
-        st.error(f"JSON decoding failed: {e}")
+    # response = requests.post('http://127.0.0.1:5000/predict', json=df.to_dict(orient='records'))
+    response = requests.post('http://prediction-diabetes.streamlit.app/predict', json=df.to_dict(orient='records'))
+    prediction = response.json()['prediction']
+    
+    if prediction[0] == 0:
+        st.success('The person does not have diabetes.')
+    else:
+        st.error('The person has diabetes.')
