@@ -76,11 +76,29 @@ data = {
 df = pd.DataFrame(data)
 
 # Button to make prediction
-if st.button('Predict'):
-    response = requests.post('https://d-predict-app.streamlit.app/predict', json=df.to_dict(orient='records'))
-    prediction = response.json()['prediction']
+# if st.button('Predict'):
+#     response = requests.post('https://d-predict-app.streamlit.app/predict', json=df.to_dict(orient='records'))
+#     prediction = response.json()['prediction']
     
-    if prediction[0] == 0:
-        st.success('The person does not have diabetes.')
+#     if prediction[0] == 0:
+#         st.success('The person does not have diabetes.')
+#     else:
+#         st.error('The person has diabetes.')
+
+if st.button('Predict'):
+    response = requests.post('https://d-predict-app.streamlit.app/predict')
+    
+    if response.status_code == 200:
+        try:
+            prediction = response.json().get('prediction')
+            if prediction is not None:
+                if prediction[0] == 0:
+                    st.success('The person does not have diabetes.')
+                else:
+                    st.warning('The person has diabetes.')
+            else:
+                st.error('Prediction key not found in the response.')
+        except ValueError:
+            st.error('Invalid JSON response.')
     else:
-        st.error('The person has diabetes.')
+        st.error(f'Error: {response.status_code}')
