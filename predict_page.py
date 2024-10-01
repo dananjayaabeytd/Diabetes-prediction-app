@@ -131,7 +131,8 @@ def show_predict_page():
 
     # Button to make prediction
     if st.button('Predict'):
-        response = requests.post('http://127.0.0.1:5000/predict', json=df.to_dict(orient='records'))
+        # response = requests.post('http://127.0.0.1:5000/predict', json=df.to_dict(orient='records'))
+        response = requests.post('https://diabetes-test-app.streamlit.app/predict', json=df.to_dict(orient='records'))
         prediction = response.json()['prediction']
 
         if prediction[0] == 0:
