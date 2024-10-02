@@ -64,6 +64,9 @@ def show_predict_page():
             response = requests.post('https://diabetes-prediction-app-o6yeqqeyiuwfac9zowfatq.streamlit.app/predict', json=df.to_dict(orient='records'))
             response.raise_for_status()  # Raise an error for bad status codes
 
+            # Print the raw response content for debugging
+            st.write("Raw response content:", response.content)
+
             # Check if the response content is empty
             if not response.content:
                 st.error("Received empty response from the server.")
