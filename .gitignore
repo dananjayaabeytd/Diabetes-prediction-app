@@ -12,6 +12,7 @@ __pycache__/
 
 # Virtual environment directories
 venv/
+myenv/
 env/
 ENV/
 env.bak/
