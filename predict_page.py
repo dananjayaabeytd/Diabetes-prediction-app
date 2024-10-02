@@ -61,7 +61,8 @@ def show_predict_page():
     # Button to make prediction
     if st.button('Predict'):
         try:
-            response = requests.post('https://diabetes-prediction-app-o6yeqqeyiuwfac9zowfatq.streamlit.app/predict', json=df.to_dict(orient='records'))
+            response = requests.post('http://localhost:5000/predict', json=df.to_dict(orient='records'))
+            # response = requests.post('https://diabetes-prediction-app-o6yeqqeyiuwfac9zowfatq.streamlit.app/predict', json=df.to_dict(orient='records'))
             response.raise_for_status()  # Raise an error for bad status codes
 
             # Print the raw response content for debugging
